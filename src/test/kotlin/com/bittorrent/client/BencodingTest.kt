@@ -5,17 +5,29 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
-class BencodeTest {
+class BencodingTest {
+    @Test
+    fun `it should return error if empty`() {
+        // Given
+        val raw = ByteArray(0)
+
+        // When
+        val maybeData = bendecode(raw)
+
+        // Then
+        assertTrue { maybeData.isFailure }
+    }
+
     @Test
     fun `it should return error if malformed`() {
         // Given
         val raw = "🐛".toByteArray()
 
         // When
-        val maybeDecoded = bdecode(raw)
+        val maybeData = bendecode(raw)
 
         // Then
-        assertTrue { maybeDecoded.isFailure }
+        assertTrue { maybeData.isFailure }
     }
 
     @Nested
@@ -26,10 +38,10 @@ class BencodeTest {
             val raw = "i42".toByteArray()
 
             // When
-            val maybeDecoded = bdecode(raw)
+            val maybeData = bendecode(raw)
 
             // Then
-            assertTrue { maybeDecoded.isFailure }
+            assertTrue { maybeData.isFailure }
         }
 
         @Test
@@ -38,10 +50,10 @@ class BencodeTest {
             val raw = "i🐛e".toByteArray()
 
             // When
-            val maybeDecoded = bdecode(raw)
+            val maybeData = bendecode(raw)
 
             // Then
-            assertTrue { maybeDecoded.isFailure }
+            assertTrue { maybeData.isFailure }
         }
 
         @Test
@@ -50,12 +62,12 @@ class BencodeTest {
             val raw = "i42e".toByteArray()
 
             // When
-            val maybeDecoded = bdecode(raw)
+            val maybeData = bendecode(raw)
 
             // Then
-            assertTrue { maybeDecoded.isSuccess }
+            assertTrue { maybeData.isSuccess }
 
-            maybeDecoded.onSuccess { assertEquals(it, 42L) }
+            maybeData.onSuccess { assertEquals(it, 42L) }
         }
     }
 }

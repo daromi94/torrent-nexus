@@ -1,6 +1,12 @@
 package com.bittorrent.client
 
-fun bdecode(raw: ByteArray): Result<Any> = decode(raw).map { it.data }
+fun bendecode(raw: ByteArray): Result<Any> {
+    if (raw.isEmpty()) {
+        return Result.failure(IllegalArgumentException("raw must be non-empty"))
+    }
+
+    return decode(raw).map { it.data }
+}
 
 private data class Chunk(
     val data: Any,
@@ -74,18 +80,18 @@ private fun ByteArray.toCharArray(): CharArray = this.map { it.char() }.toCharAr
 private fun CharArray.toLong(): Result<Long> {
     val base = 10
 
-    var exp = 1
-    var acum = 0L
+    var power = 1L
+    var total = 0L
 
     for (i in this.size - 1 downTo 0) {
         try {
-            acum += this[i].digitToInt(base) * exp.toLong()
+            total += this[i].digitToInt(base) * power
         } catch (e: IllegalArgumentException) {
             return Result.failure(e)
         }
 
-        exp *= base
+        power *= base
     }
 
-    return Result.success(acum)
+    return Result.success(total)
 }
