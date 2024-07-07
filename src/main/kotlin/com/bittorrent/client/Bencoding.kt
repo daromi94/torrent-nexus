@@ -1,5 +1,12 @@
 package com.bittorrent.client
 
+import com.bittorrent.client.shared.byte
+import com.bittorrent.client.shared.char
+import com.bittorrent.client.shared.indexOf
+import com.bittorrent.client.shared.toCharArray
+import com.bittorrent.client.shared.toInt
+import com.bittorrent.client.shared.toLong
+
 fun bendecode(raw: ByteArray): Result<Any> {
     if (raw.isEmpty()) {
         return Result.failure(IllegalArgumentException("raw must be non-empty"))
@@ -24,10 +31,41 @@ private fun decode(
     val token = raw[pivot].char()
 
     return when {
+        Character.isDigit(token) -> decodeString(raw, pivot)
+
         token == 'i' -> decodeInteger(raw, pivot)
 
         else -> Result.failure(IllegalArgumentException("invalid token $token at index $pivot"))
     }
+}
+
+private fun decodeString(
+    raw: ByteArray,
+    pivot: Int,
+): Result<Chunk> {
+    val colonIndex = raw.indexOf(':'.byte(), startIndex = pivot + 1)
+
+    if (colonIndex == -1) {
+        return Result.failure(IllegalArgumentException("colon for digit at index $pivot not found"))
+    }
+
+    val maybeLength = raw.sliceArray(pivot..<colonIndex).toCharArray().toInt()
+
+    if (maybeLength.isFailure) {
+        return Result.failure(IllegalArgumentException("string length at index $pivot cannot be parsed"))
+    }
+
+    val length = maybeLength.getOrThrow()
+
+    val endIndex = colonIndex + length
+
+    if (endIndex >= raw.size) {
+        return Result.failure(IllegalArgumentException("string length at index $pivot exceeds input size"))
+    }
+
+    val data = raw.sliceArray(colonIndex + 1..endIndex).toCharArray().joinToString("")
+
+    return Result.success(Chunk(data, endIndex))
 }
 
 private fun decodeInteger(
@@ -49,49 +87,4 @@ private fun decodeInteger(
     val data = maybeData.getOrThrow()
 
     return Result.success(Chunk(data, eIndex))
-}
-
-private fun Byte.char(): Char = this.toInt().toChar()
-
-private fun Char.byte(): Byte = this.code.toByte()
-
-private fun ByteArray.indexOf(
-    element: Byte,
-    startIndex: Int,
-): Int {
-    if (startIndex >= this.size) {
-        return -1
-    }
-
-    var index = -1
-
-    for (i in startIndex..<this.size) {
-        if (this[i] == element) {
-            index = i
-            break
-        }
-    }
-
-    return index
-}
-
-private fun ByteArray.toCharArray(): CharArray = this.map { it.char() }.toCharArray()
-
-private fun CharArray.toLong(): Result<Long> {
-    val base = 10
-
-    var power = 1L
-    var total = 0L
-
-    for (i in this.size - 1 downTo 0) {
-        try {
-            total += this[i].digitToInt(base) * power
-        } catch (e: IllegalArgumentException) {
-            return Result.failure(e)
-        }
-
-        power *= base
-    }
-
-    return Result.success(total)
 }
