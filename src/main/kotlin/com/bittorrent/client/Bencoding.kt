@@ -35,7 +35,7 @@ private fun decode(
 
         token == 'i' -> decodeInteger(raw, pivot)
 
-        else -> Result.failure(IllegalArgumentException("invalid token $token at index $pivot"))
+        else -> Result.failure(IllegalArgumentException("invalid token '$token' at index $pivot"))
     }
 }
 
@@ -46,7 +46,7 @@ private fun decodeString(
     val colonIndex = raw.indexOf(':'.byte(), pivot + 1)
 
     if (colonIndex == -1) {
-        return Result.failure(IllegalArgumentException("colon for digit at index $pivot not found"))
+        return Result.failure(IllegalArgumentException("colon for digit at index $pivot missing"))
     }
 
     val maybeLength = raw.sliceArray(pivot..<colonIndex).toCharArray().toInt()
@@ -75,7 +75,7 @@ private fun decodeInteger(
     val eIndex = raw.indexOf('e'.byte(), pivot + 1)
 
     if (eIndex == -1) {
-        return Result.failure(IllegalArgumentException("matching 'e' for 'i' at index $pivot not found"))
+        return Result.failure(IllegalArgumentException("matching 'e' for 'i' at index $pivot missing"))
     }
 
     val maybeData = raw.sliceArray(pivot + 1..<eIndex).toCharArray().toLong()
