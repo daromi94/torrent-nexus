@@ -43,7 +43,7 @@ private fun decodeString(
     raw: ByteArray,
     pivot: Int,
 ): Result<Chunk> {
-    val colonIndex = raw.indexOf(':'.byte(), startIndex = pivot + 1)
+    val colonIndex = raw.indexOf(':'.byte(), pivot + 1)
 
     if (colonIndex == -1) {
         return Result.failure(IllegalArgumentException("colon for digit at index $pivot not found"))
@@ -72,7 +72,7 @@ private fun decodeInteger(
     raw: ByteArray,
     pivot: Int,
 ): Result<Chunk> {
-    val eIndex = raw.indexOf('e'.byte(), startIndex = pivot + 1)
+    val eIndex = raw.indexOf('e'.byte(), pivot + 1)
 
     if (eIndex == -1) {
         return Result.failure(IllegalArgumentException("matching 'e' for 'i' at index $pivot not found"))
