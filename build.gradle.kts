@@ -6,7 +6,7 @@ group = "com.bittorrent.client"
 version = "0.1.0"
 
 kotlin {
-    jvmToolchain(17)
+    jvmToolchain(21)
 }
 
 repositories {
