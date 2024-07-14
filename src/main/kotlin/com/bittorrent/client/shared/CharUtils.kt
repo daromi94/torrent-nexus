@@ -1,7 +1,5 @@
 package com.bittorrent.client.shared
 
-fun Char.byte(): Byte = this.code.toByte()
-
 fun CharArray.toInt(): Result<Int> {
     val base = 10
 

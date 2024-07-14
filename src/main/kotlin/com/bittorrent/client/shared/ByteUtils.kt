@@ -1,5 +1,7 @@
 package com.bittorrent.client.shared
 
+fun b(value: Int): Byte = value.toByte()
+
 fun Byte.char(): Char = this.toInt().toChar()
 
 fun ByteArray.toCharArray(): CharArray = this.map { it.char() }.toCharArray()

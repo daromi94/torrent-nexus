@@ -92,7 +92,6 @@ class BencodingTest {
 
             // Then
             assertTrue { maybeData.isSuccess }
-
             maybeData.onSuccess { assertEquals(it, "hello") }
         }
     }
@@ -133,7 +132,6 @@ class BencodingTest {
 
             // Then
             assertTrue { maybeData.isSuccess }
-
             maybeData.onSuccess { assertEquals(it, 42L) }
         }
     }
