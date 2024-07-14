@@ -1,4 +1,4 @@
-package com.bittorrent.client.shared
+package com.bittorrent.client.util
 
 fun CharArray.toInt(): Result<Int> {
     val base = 10

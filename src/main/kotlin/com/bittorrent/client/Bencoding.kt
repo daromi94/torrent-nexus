@@ -1,11 +1,11 @@
 package com.bittorrent.client
 
-import com.bittorrent.client.shared.b
-import com.bittorrent.client.shared.char
-import com.bittorrent.client.shared.indexOf
-import com.bittorrent.client.shared.toCharArray
-import com.bittorrent.client.shared.toInt
-import com.bittorrent.client.shared.toLong
+import com.bittorrent.client.util.b
+import com.bittorrent.client.util.char
+import com.bittorrent.client.util.indexOf
+import com.bittorrent.client.util.toCharArray
+import com.bittorrent.client.util.toInt
+import com.bittorrent.client.util.toLong
 
 fun bendecode(raw: ByteArray): Result<Any> {
     if (raw.isEmpty()) {
