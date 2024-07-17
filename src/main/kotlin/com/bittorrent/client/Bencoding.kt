@@ -57,7 +57,7 @@ private fun decodeString(
 
     val endIndex = colonIndex + length
     if (endIndex >= raw.size) {
-        return Result.failure(IllegalArgumentException("string length at index $pivot exceeds input size"))
+        return Result.failure(IndexOutOfBoundsException("string length at index $pivot exceeds input size"))
     }
 
     val data = raw.sliceArray(colonIndex + 1..endIndex).toCharArray().joinToString("")
