@@ -1,4 +1,4 @@
-package com.bittorrent.client
+package com.torrent.nexus
 
 import org.junit.jupiter.api.Nested
 import kotlin.test.Test

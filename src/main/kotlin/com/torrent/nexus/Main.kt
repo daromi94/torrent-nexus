@@ -1,4 +1,4 @@
-package com.bittorrent.client
+package com.torrent.nexus
 
 fun main() {
     println("Hello, World!")

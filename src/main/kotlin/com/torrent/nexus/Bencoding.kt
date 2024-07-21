@@ -1,11 +1,11 @@
-package com.bittorrent.client
+package com.torrent.nexus
 
-import com.bittorrent.client.util.b
-import com.bittorrent.client.util.char
-import com.bittorrent.client.util.indexOf
-import com.bittorrent.client.util.toCharArray
-import com.bittorrent.client.util.toInt
-import com.bittorrent.client.util.toLong
+import com.torrent.nexus.util.b
+import com.torrent.nexus.util.char
+import com.torrent.nexus.util.indexOf
+import com.torrent.nexus.util.toCharArray
+import com.torrent.nexus.util.toInt
+import com.torrent.nexus.util.toLong
 
 fun bendecode(raw: ByteArray): Result<Any> {
     if (raw.isEmpty()) {

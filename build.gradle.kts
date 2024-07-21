@@ -2,7 +2,7 @@ plugins {
     kotlin("jvm") version "2.0.0"
 }
 
-group = "com.bittorrent.client"
+group = "com.torrent.nexus"
 version = "0.1.0"
 
 kotlin {
