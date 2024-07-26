@@ -48,12 +48,10 @@ private fun decodeString(
         return Result.failure(IllegalArgumentException("colon for digit at index $pivot missing"))
     }
 
-    val maybeLength = raw.sliceArray(pivot..<colonIndex).toCharArray().toInt()
-    if (maybeLength.isFailure) {
+    val length = raw.sliceArray(pivot..<colonIndex).toCharArray().toInt()
+    if (length == null) {
         return Result.failure(IllegalArgumentException("string length at index $pivot cannot be parsed"))
     }
-
-    val length = maybeLength.getOrThrow()
 
     val endIndex = colonIndex + length
     if (endIndex >= raw.size) {
@@ -74,12 +72,10 @@ private fun decodeInteger(
         return Result.failure(IllegalArgumentException("matching 'e' for 'i' at index $pivot missing"))
     }
 
-    val maybeData = raw.sliceArray(pivot + 1..<eIndex).toCharArray().toLong()
-    if (maybeData.isFailure) {
+    val data = raw.sliceArray(pivot + 1..<eIndex).toCharArray().toLong()
+    if (data == null) {
         return Result.failure(IllegalArgumentException("integer data at index $pivot cannot be parsed"))
     }
-
-    val data = maybeData.getOrThrow()
 
     return Result.success(Chunk(data, eIndex))
 }

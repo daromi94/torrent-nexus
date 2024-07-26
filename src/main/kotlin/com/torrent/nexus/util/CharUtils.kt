@@ -1,6 +1,6 @@
 package com.torrent.nexus.util
 
-fun CharArray.toInt(): Result<Int> {
+fun CharArray.toInt(): Int? {
     val base = 10
 
     var power = 1
@@ -9,17 +9,17 @@ fun CharArray.toInt(): Result<Int> {
     for (i in this.size - 1 downTo 0) {
         try {
             total += this[i].digitToInt(base) * power
-        } catch (e: IllegalArgumentException) {
-            return Result.failure(e)
+        } catch (_: IllegalArgumentException) {
+            return null
         }
 
         power *= base
     }
 
-    return Result.success(total)
+    return total
 }
 
-fun CharArray.toLong(): Result<Long> {
+fun CharArray.toLong(): Long? {
     val base = 10
 
     var power = 1L
@@ -28,12 +28,12 @@ fun CharArray.toLong(): Result<Long> {
     for (i in this.size - 1 downTo 0) {
         try {
             total += this[i].digitToInt(base) * power
-        } catch (e: IllegalArgumentException) {
-            return Result.failure(e)
+        } catch (_: IllegalArgumentException) {
+            return null
         }
 
         power *= base
     }
 
-    return Result.success(total)
+    return total
 }
