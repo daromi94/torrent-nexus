@@ -1,4 +1,4 @@
-package com.torrent.nexus.util
+package com.daromi.torrent.nexus.util
 
 fun CharArray.toInt(): Int? {
     val base = 10

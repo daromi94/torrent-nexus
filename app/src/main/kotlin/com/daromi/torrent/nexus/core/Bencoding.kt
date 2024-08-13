@@ -1,11 +1,11 @@
-package com.torrent.nexus
+package com.daromi.torrent.nexus.core
 
-import com.torrent.nexus.util.b
-import com.torrent.nexus.util.char
-import com.torrent.nexus.util.indexOf
-import com.torrent.nexus.util.toCharArray
-import com.torrent.nexus.util.toInt
-import com.torrent.nexus.util.toLong
+import com.daromi.torrent.nexus.util.b
+import com.daromi.torrent.nexus.util.char
+import com.daromi.torrent.nexus.util.indexOf
+import com.daromi.torrent.nexus.util.toCharArray
+import com.daromi.torrent.nexus.util.toInt
+import com.daromi.torrent.nexus.util.toLong
 
 fun bendecode(raw: ByteArray): Result<Any> {
     if (raw.isEmpty()) {

@@ -1,5 +1,6 @@
-package com.torrent.nexus
+package com.daromi.torrent.nexus
 
+import com.daromi.torrent.nexus.core.bendecode
 import org.junit.jupiter.api.Nested
 import kotlin.test.Test
 import kotlin.test.assertEquals

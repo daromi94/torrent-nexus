@@ -1,0 +1,11 @@
+[versions]
+kotlin-jvm = "2.0.0"
+kotlin-test = "2.0.0"
+arrow = "1.2.4"
+
+[libraries]
+kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin-test" }
+arrow-core = { module = "io.arrow-kt:arrow-core", version.ref = "arrow" }
+
+[plugins]
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin-jvm" }

@@ -1,4 +1,4 @@
-package com.torrent.nexus
+package com.daromi.torrent.nexus.cli
 
 fun main() {
     println("Hello, World!")
