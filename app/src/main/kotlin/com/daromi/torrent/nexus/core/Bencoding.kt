@@ -24,11 +24,11 @@ sealed class BendecodeError(
 ) : Error
 
 class IllegalInputError(
-    override val message: String,
+    message: String,
 ) : BendecodeError(message)
 
 class IllegalStateError(
-    override val message: String,
+    message: String,
 ) : BendecodeError(message)
 
 private data class Chunk(
