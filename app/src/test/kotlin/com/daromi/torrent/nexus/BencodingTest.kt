@@ -16,7 +16,7 @@ class BencodingTest {
         val maybeData = bendecode(raw)
 
         // Then
-        assertTrue { maybeData.isFailure }
+        assertTrue { maybeData.isLeft() }
     }
 
     @Test
@@ -28,7 +28,7 @@ class BencodingTest {
         val maybeData = bendecode(raw)
 
         // Then
-        assertTrue { maybeData.isFailure }
+        assertTrue { maybeData.isLeft() }
     }
 
     @Nested
@@ -42,7 +42,7 @@ class BencodingTest {
             val maybeData = bendecode(raw)
 
             // Then
-            assertTrue { maybeData.isFailure }
+            assertTrue { maybeData.isLeft() }
         }
 
         @Test
@@ -54,7 +54,7 @@ class BencodingTest {
             val maybeData = bendecode(raw)
 
             // Then
-            assertTrue { maybeData.isFailure }
+            assertTrue { maybeData.isLeft() }
         }
 
         @Test
@@ -66,7 +66,7 @@ class BencodingTest {
             val maybeData = bendecode(raw)
 
             // Then
-            assertTrue { maybeData.isFailure }
+            assertTrue { maybeData.isLeft() }
         }
 
         @Test
@@ -78,9 +78,9 @@ class BencodingTest {
             val maybeData = bendecode(raw)
 
             // Then
-            assertTrue { maybeData.isSuccess }
+            assertTrue { maybeData.isRight() }
 
-            maybeData.onSuccess { assertEquals(it, "") }
+            maybeData.onRight { assertEquals(it, "") }
         }
 
         @Test
@@ -92,8 +92,8 @@ class BencodingTest {
             val maybeData = bendecode(raw)
 
             // Then
-            assertTrue { maybeData.isSuccess }
-            maybeData.onSuccess { assertEquals(it, "hello") }
+            assertTrue { maybeData.isRight() }
+            maybeData.onRight { assertEquals(it, "hello") }
         }
     }
 
@@ -108,7 +108,7 @@ class BencodingTest {
             val maybeData = bendecode(raw)
 
             // Then
-            assertTrue { maybeData.isFailure }
+            assertTrue { maybeData.isLeft() }
         }
 
         @Test
@@ -120,7 +120,7 @@ class BencodingTest {
             val maybeData = bendecode(raw)
 
             // Then
-            assertTrue { maybeData.isFailure }
+            assertTrue { maybeData.isLeft() }
         }
 
         @Test
@@ -132,8 +132,8 @@ class BencodingTest {
             val maybeData = bendecode(raw)
 
             // Then
-            assertTrue { maybeData.isSuccess }
-            maybeData.onSuccess { assertEquals(it, 42L) }
+            assertTrue { maybeData.isRight() }
+            maybeData.onRight { assertEquals(it, 42L) }
         }
     }
 }
